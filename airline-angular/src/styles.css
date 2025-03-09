@@ -1,0 +1,237 @@
+html, body {
+  height: 100vh;
+  width: 100vw;
+  margin: 0;
+  padding: 0;
+  scrollbar-width: none
+}
+
+.vignette {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  box-shadow: 0 0 180px rgba(54, 32, 16, 0.5) inset;
+}
+
+.bg-start {
+  background-image: url("app/assets/island-bg.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  height: 100dvh;
+  width: 100dvw;
+  z-index: -1;
+}
+
+.start label{
+  font-weight: 500;
+  color: #626262;
+}
+
+.start a{
+  color: #8AA6E6;
+}
+
+.start .float {
+  background-color: white;
+  width: 450px;
+}
+
+.start-logo {
+    background-image: url('app/assets/donnair-logo.svg');
+    height:58px;
+    width: 300px; 
+    background-size: contain;
+    background-repeat: no-repeat;
+    margin: 50px 0 5px 0;
+  }
+
+  .airplane-icon {
+    background-image: url('app/assets/plane-icon.svg');
+    height:30px;
+    width: 30px; 
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
+
+  .admin-home-logo {
+    background-image: url('app/assets/donnair-admin-logo.svg');
+    height:58px;
+    width: 300px; 
+    background-size: contain;
+    background-repeat: no-repeat;
+    margin: 0 50px 0 0;
+  }
+
+  .home-logo {
+    background-image: url('app/assets/donnair-logo.svg');
+    height:58px;
+    width: 300px; 
+    background-size: contain;
+    background-repeat: no-repeat;
+    margin: 0 50px 0 0;
+  }
+
+button.book{
+  background-color: #B0C38B;
+  border: none;
+  border-radius: 8px;
+  height: 30px;
+  width: 110px;
+  color: white;
+  font-size: 15px;
+}
+
+button.delete{
+  background-color: #bd4343;
+  border: none;
+  border-radius: 8px;
+  height: 30px;
+  width: 110px;
+  color: white;
+  font-size: 14px;
+}
+
+.foot-link{
+    margin: 50px 0 50px 0;
+}
+
+
+.start button{
+    background-color: #B0C38B;
+}
+
+.start input, .start button{
+    height: 47px;
+    border-radius: 7px;
+}
+
+.start input{
+    border-color:  #828282;
+    padding: 3px 12px 3px 12px;
+    border-style: solid;
+}
+
+.start button{
+    font-size: 18px;
+    font-weight:500;
+    margin-top: 30px;
+    border: 0;
+}
+
+.start h5{
+    color: #626262;
+}
+
+.navbar{
+  background-color: #F3F2F0;
+  box-shadow: 0 3px 8px #dedede;
+}
+
+.navbar a{
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 18px;
+  color: #3A3A3A;
+}
+
+.home h2, .search h2, .add h2{
+  margin: 30px 0 25px 0;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  display: none;
+}
+
+input[type="date"]::-moz-calendar-picker-indicator {
+  display: none;
+}
+
+.search input[type="date"]{
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+.search input{
+  width: 250px;
+  height: 40px;
+  border-width: 0;
+  background-color: transparent;
+  font-size: 18px;
+  color: #626262;
+}
+
+.search .float{
+  border-radius: 14px;
+  background-color: #F3F2F0;
+  box-shadow: -2px 3px 8px #dedede;
+}
+
+.search .city, .search .date{
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: -2px 3px 8px #dedede;
+}
+
+.search input:focus {
+  outline: none;
+}
+
+.search button{
+  background-color: #B0C38B;
+  border: none;
+  border-radius: 13px;
+  color: white;
+  height: 50px;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.search label{
+  font-size: 13px;
+  margin: 10px 0 5px 0;
+  color: #626262;
+}
+
+.search a{
+  font-size: 20px;
+  font-weight: 650;
+}
+
+th{
+  font-size: 19px;
+  font-weight: 600;
+}
+
+.add .float{
+  background-color: #F3F2F0;
+  width: 350px;
+  border-radius: 15px;
+  box-shadow: -2px 3px 8px #dedede;
+}
+
+.add input{
+  border-radius: 4px;
+  border-style: none;
+  height: 33px;
+  padding: 5px 6px 5px 6px;
+  box-shadow: -1px 2px 6px #dedede;
+}
+
+.add label{
+  font-size: 13px;
+}
+
+.add button{
+  width: 130px;
+  height: 35px;
+  border: none;
+  background-color: #B0C38B;
+  border-radius: 8px;
+  color: white;
+  font-weight: 500;
+}
