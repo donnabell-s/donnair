@@ -1,0 +1,69 @@
+<div class="container ">
+<div class="search">
+  <h2>Search Flights</h2>
+    <div class="d-flex flex-column justify-content-center float w-100">
+      <div class="d-flex flex-row align-items-center me-4 ms-4 mt-4 gap-2">
+        <div class="airplane-icon"></div>
+        <div><a>Flight</a></div>
+      </div>
+      <form class="row d-flex justify-content-between m-2" (ngSubmit)="searchFlights()">
+        <div class="col-5 d-flex flex-row flex-wrap m-3 city">
+          <div class="d-flex flex-column">
+            <label>Departure City:</label>
+            <input [(ngModel)]="searchCriteria.DepartureCityDetails"
+              name="departureCity"
+              placeholder="Enter departure city"
+            />
+          </div>
+          <div class="d-flex flex-column">
+            <label>Destination City:</label>
+            <input [(ngModel)]="searchCriteria.ArrivalCityDetails"
+              name="arrivalCity"
+              placeholder="Enter destination city"
+            />
+          </div>
+        </div>
+        <div class="col-5 d-flex flex-row flex-wrap m-3 date">
+          <div class="d-flex flex-column">
+            <label>Depart:</label>
+            <input type="date" name="depart" [(ngModel)]="searchCriteria.DepartureDateTime" />
+          </div>
+          <div class="d-flex flex-column">
+            <label>Return:</label>
+            <input type="date" name="return" [(ngModel)]="searchCriteria.ArrivalDateTime" />
+          </div>
+        </div>
+        <div class="col d-flex flex-wrap justify-content-center align-items-center">
+          <button class="w-100 btn btn-success" type="submit">Search</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="d-flex w-100 table-responsive-sm mt-4">
+    <table class="table table-striped table-hover w-100" *ngIf="filteredFlights.length > 0">
+      <thead>
+        <tr>
+          <th>Flight Number</th>
+          <th>Departure City</th>
+          <th>Destination City</th>
+          <th>Departure Time</th>
+          <th>Arrival Time</th>
+          <th>Available Seats</th>
+          <th>Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let flight of filteredFlights">
+          <td>{{ flight.FlightNumber }}</td>
+          <td>{{ flight.DepartureCityDetails.City }}</td>
+          <td>{{ flight.ArrivalCityDetails.City }}</td>
+          <td>{{ flight.DepartureDateTime }}</td>
+          <td>{{ flight.ArrivalDateTime }}</td>
+          <td>{{ flight.AvailableSeats }}</td>
+          <td>{{ flight.Price | currency : "PHP" }}</td>
+        </tr>
+      </tbody>
+    </table>
+    <p *ngIf="filteredFlights.length === 0 && isSearched">No flights found.</p>
+  </div>
+</div>

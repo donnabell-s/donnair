@@ -1,0 +1,28 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary pt-3 pb-3 pe-5 ps-5">
+    <div class="container-fluid">
+      <ng-container>
+        <div class="admin-home-logo navbar-brand" *ngIf="isAdmin"></div>
+      </ng-container>
+      <ng-container>
+        <div class="home-logo" *ngIf="!isAdmin"></div>
+      </ng-container>
+      <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0 gap-4">
+          <li class="nav-item">
+        <a routerLink="/flight-list">Home</a>
+          </li>
+          <li class="nav-item">
+            <a *ngIf="isAdmin" routerLink="/flight-add">Add Flight</a>
+          </li>
+          <li class="nav-item">
+            <a routerLink="/flight-search">Search Flights</a>
+          </li>
+        </ul>
+        <div>
+          <ng-container>
+            <a (click)="onLogout()" style="cursor: pointer">Log Out</a>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+  </nav>
