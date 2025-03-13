@@ -28,6 +28,18 @@ export class FlightListComponent implements OnInit {
     );
   }
 
+  deleteFlight(flight: Flight){
+    this.flightService.deleteFlight(flight.FlightID).subscribe(
+      (response) =>{
+        console.log('Flight Deleted', response);
+        this.flights = this.flights.filter(f => f.FlightID !== flight.FlightID);
+      },
+      (error) =>{
+        console.error('Failed to Delete FLight', error);
+      }
+    );
+  }
+
   get isAdmin(): boolean {
     const user = JSON.parse(localStorage.getItem('user') || '{}');
     return user ? user.Role === 'admin' : false;

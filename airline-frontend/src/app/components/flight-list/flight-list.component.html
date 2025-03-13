@@ -29,7 +29,16 @@
         <td>{{ flight.ArrivalDateTime }}</td>
         <td>{{ flight.AvailableSeats }}</td>
         <td>{{ flight.Price | currency : "PHP" }}</td>
-        <td></td>
+        <td>
+          <ng-container *ngIf="!isAdmin">
+            <button type="button" class="btn btn-success book">
+              Book Flight
+            </button>
+          </ng-container>
+          <ng-container *ngIf="isAdmin">
+            <button class="delete btn btn-danger" (click)="deleteFlight(flight)">Delete Flight</button>
+          </ng-container>
+        </td>
   </table>
 </div>
 </div>

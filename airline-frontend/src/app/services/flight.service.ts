@@ -19,6 +19,10 @@ export class FlightService {
     return this.http.get(`${this.apiUrl}${id}/`);
   }
 
+  deleteFlight(id: number): Observable<any>{
+    return this.http.delete(`${this.apiUrl}${id}/`);
+  }
+
   addFlight(newFlight: {FlightNumber: string, DepartureCity: number, ArrivalCity: number, DepartureDateTime: string, ArrivalDateTime: string, Price: number}): Observable<any> {
     return this.http.post(this.apiUrl, newFlight);
   }

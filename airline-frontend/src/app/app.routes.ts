@@ -18,11 +18,3 @@ export const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: '**', redirectTo: '/login' }
 ];
-
-
-
-  // Admin-only routes
-  // { path: 'admin', component: AdminDashboardComponent, canActivate: [authGuard], data: { role: 'admin' } },
-
-  // Customer-only routes
-  // { path: 'bookings', component: BookingsComponent, canActivate: [authGuard], data: { role: 'customer' } },

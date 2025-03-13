@@ -54,4 +54,9 @@ export class FlightSearchComponent implements OnInit {
         return matchesDeparture && matchesDestination && matchesDepartureDT && matchesArrivalDT;
     });
   }
+
+  get isAdmin(): boolean {
+    const user = JSON.parse(localStorage.getItem('user') || '{}');
+    return user ? user.Role === 'admin' : false;
+  }
 }
