@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from .models import User, City, Flight, Seat, UserTicket
+from .models import User, City, Flight, Seat
 
 class CustomUserAdmin(UserAdmin):
     list_display = ('username', 'email', 'Role', 'is_staff', 'is_superuser')
@@ -24,6 +24,5 @@ admin.site.register(User, CustomUserAdmin)
 
 admin.site.register(City)
 admin.site.register(Flight)
-# admin.site.register(Booking)
 admin.site.register(Seat)
-admin.site.register(UserTicket)
+# admin.site.register(UserTicket)

@@ -7,6 +7,7 @@ import { FlightSearchComponent } from './components/flight-search/flight-search.
 import { HeaderComponent } from './components/header/header.component';
 import { authGuard } from './guard/auth.guard';
 import { FlightAddComponent } from './components/flight-add/flight-add.component';
+import { FlightBookComponent } from './components/flight-book/flight-book.component';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -14,6 +15,7 @@ export const routes: Routes = [
   { path: 'flight-list', component: FlightListComponent, canActivate: [authGuard] },
   { path: 'flight-search', component: FlightSearchComponent, canActivate: [authGuard] },
   { path: 'flight-add', component: FlightAddComponent, canActivate: [authGuard], data: { role: 'admin' } },
+  { path: 'flight-book', component: FlightBookComponent, canActivate: [authGuard], data: { role: 'customer' } },
   { path: 'header', component: HeaderComponent, canActivate: [authGuard] },
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: '**', redirectTo: '/login' }

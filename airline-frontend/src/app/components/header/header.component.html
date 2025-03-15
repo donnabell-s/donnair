@@ -15,6 +15,9 @@
             <a *ngIf="isAdmin" routerLink="/flight-add">Add Flight</a>
           </li>
           <li class="nav-item">
+            <a *ngIf="!isAdmin" routerLink="/">Booked Flights</a>
+          </li>
+          <li class="nav-item">
             <a routerLink="/flight-search">Search Flights</a>
           </li>
         </ul>

@@ -16,7 +16,7 @@
         <th>Departure Time</th>
         <th>Arrival Time</th>
         <th>Available Seats</th>
-        <th>Price</th>
+        <!-- <th>Base Price</th> -->
         <th>Actions</th>
       </tr>
     </thead>
@@ -28,10 +28,10 @@
         <td>{{ flight.DepartureDateTime }}</td>
         <td>{{ flight.ArrivalDateTime }}</td>
         <td>{{ flight.AvailableSeats }}</td>
-        <td>{{ flight.Price | currency : "PHP" }}</td>
+        <!-- <td>{{ flight.Price | currency : "PHP" }}</td> -->
         <td>
           <ng-container *ngIf="!isAdmin">
-            <button type="button" class="btn btn-success book">
+            <button type="button" class="btn btn-success book" routerLink="/flight-book">
               Book Flight
             </button>
           </ng-container>

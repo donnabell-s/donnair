@@ -8,13 +8,14 @@ import { Observable, BehaviorSubject } from 'rxjs';
 export class AuthService {
   private url = 'http://127.0.0.1:8000/bookings/api/token/'
   private userUrl = 'http://127.0.0.1:8000/bookings/api/users/me'
+  private registerUrl = 'http://127.0.0.1:8000/bookings/api/users/'
   private isLoggedInSubject = new BehaviorSubject<boolean>(this.isAuthenticated());
   isLoggedIn$ = this.isLoggedInSubject.asObservable();
 
   constructor(private http: HttpClient) { }
  
   register( user: { username: string, email: string, password:string }): Observable<any>{
-    return this.http.post(this.url, user)
+    return this.http.post(this.registerUrl, user)
   }
 
   login(credentials: { username: string, password: string }): Observable<any>{

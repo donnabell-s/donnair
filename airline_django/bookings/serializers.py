@@ -1,6 +1,7 @@
 from rest_framework import serializers
-from .models import User,City,Flight,Seat,UserTicket
+from .models import User,City,Flight,Seat
 from rest_framework_simplejwt.tokens import RefreshToken
+from django.contrib.auth.hashers import make_password
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -10,6 +11,10 @@ class UserSerializer(serializers.ModelSerializer):
             'password':{'write_only': True},
             'Role':{'read_only': True},
         }
+        
+    def create(self, validated_data):
+        validated_data['password'] = make_password(validated_data['password'])
+        return super().create(validated_data)
 
 class CitySerializer(serializers.ModelSerializer):
     class Meta:
@@ -33,19 +38,45 @@ class FlightSerializer(serializers.ModelSerializer):
             'AvailableSeats': {'read_only': True},
         }
 
+    def create(self, validated_data):
+        flight = Flight.objects.create(**validated_data)
+        self._generate_seats(flight)
+        return flight
 
-# class BookingSerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = Booking
-#         fields = ['BookingID', 'User', 'Flight', 'BookingDateTime', 'NumberOfPassengers', 'TotalPrice']
+    def _generate_seats(self, flight):
+        columns = ['A', 'B', 'C', 'D', 'E', 'F']
+        rows = range(1, 22)
+
+        for row in rows:
+            for column in columns:
+                seat_number = f"{column}{row}"
+                if row <= 7:
+                    seat_class = 'First Class'
+                elif row <= 14:
+                    seat_class = 'Business'
+                else:
+                    seat_class = 'Economy'
+
+                Seat.objects.create(
+                    Flight=flight,
+                    SeatNumber=seat_number,
+                    Class=seat_class,
+                    User=None
+                )
+
 
 class SeatSerializer(serializers.ModelSerializer):
     class Meta:
         model = Seat
-        fields = ['SeatID', 'Flight', 'SeatNumber', 'IsBooked']
+        fields = ['SeatID', 'Flight', 'User', 'SeatNumber', 'Class']
+        extra_kwargs = {
+            'Flight':{'read_only': True},
+            'SeatNumber':{'read_only': True},
+            'Class':{'read_only': True},
+        }
 
 
-class UserTicketSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = UserTicket
-        fields = ['UserTicketID', 'User', 'Flight', 'Seat']
+# class UserTicketSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = UserTicket
+#         fields = ['UserTicketID', 'User', 'Flight', 'Seat']

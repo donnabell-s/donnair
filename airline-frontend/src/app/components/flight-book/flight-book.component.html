@@ -1,0 +1,26 @@
+<div class="container d-flex flex-row justify-content-between pt-4 pb-4 book">
+    <div class="booked-seats d-flex flex-column justify-content-between p-4">
+      <div class="d-flex flex-row align-items-center gap-2">
+        <div class="airplane-icon"></div>
+        <div><a>A1 (Cebu-Osaka)</a></div>
+      </div>
+      <div class="chosen-seats"></div>
+      <div class="d-flex flex-column gap-3">
+        <div class="d-flex justify-content-between payment">
+          <h6>Total Price</h6>
+          <h6>PHP 0.00</h6>
+        </div>
+        <div class="d-flex justify-content-center">
+          <button>Book Flight</button>
+        </div>
+      </div>
+    </div>
+    <div class="seats d-flex justify-content-top me-5 ms-5">
+      <div *ngFor="let row of seats; let i = index" class="seat-row">
+        <div *ngFor="let seat of row; let j = index" class="seat" [ngClass]="{'booked': seat.booked}" (click)="bookSeat(seat)">
+          {{ seat.id }}
+        </div>
+      </div>
+      
+    </div>
+</div>
