@@ -72,6 +72,7 @@ constructor(private flightService: FlightService, private router: Router){}
           ArrivalDateTime: '',
           Price: 0,
       };
+      this.router.navigate(['/flight-list']);
       },
       (error) => {
         console.error('Failed to add flight', error);

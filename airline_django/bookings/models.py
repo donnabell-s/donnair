@@ -64,16 +64,27 @@ class Seat(models.Model):
     User = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     SeatNumber = models.CharField(max_length=10)
     Class = models.CharField(max_length=15, null=True)
-    # IsBooked = models.BooleanField(default=False)
- 
+
     def __str__(self):
         return f"Seat {self.SeatNumber} on Flight {self.Flight.FlightNumber}"
 
-# class UserTicket(models.Model):
-#     UserTicketID = models.AutoField(primary_key=True)
-#     User = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='tickets')
-#     Flight = models.ForeignKey(Flight, on_delete=models.CASCADE, related_name='tickets')
-#     Seat = models.ForeignKey(Seat, on_delete=models.CASCADE, related_name='tickets')
- 
-#     def __str__(self):
-#         return f"Ticket {self.UserTicketID} for {self.User.email} on Flight {self.Flight.FlightNumber} (Seat {self.Seat.SeatNumber})"
+    def save(self, *args, **kwargs):
+        # Check if the seat is being created (is a new instance)
+        is_new = self._state.adding
+
+        # Check if the seat is being booked (User  is being set)
+        is_booking = self.User is not None
+
+        # If the seat is being booked and it's not a new instance, decrement the available seats
+        if is_booking and not is_new:
+            self.Flight.AvailableSeats -= 1
+            self.Flight.save()
+
+        # Call the original save method
+        super().save(*args, **kwargs)
+
+        # If the seat is being unbooked (User  is being set to None), increment the available seats
+        if not is_booking and self.User is None and not is_new:
+            self.Flight.AvailableSeats += 1
+            self.Flight.save()
+
