@@ -1,26 +1,41 @@
-<div class="container d-flex flex-row justify-content-between pt-4 pb-4 book">
-    <div class="booked-seats d-flex flex-column justify-content-between p-4">
-      <div class="d-flex flex-row align-items-center gap-2">
-        <div class="airplane-icon"></div>
-        <div><a>A1 (Cebu-Osaka)</a></div>
-      </div>
-      <div class="chosen-seats"></div>
-      <div class="d-flex flex-column gap-3">
-        <div class="d-flex justify-content-between payment">
-          <h6>Total Price</h6>
-          <h6>PHP 0.00</h6>
+<div class="container">
+  <div class="mt-5 d-flex flex-row gap-5 justify-content-center content">
+    <div class="selected-float d-flex flex-column justify-content-between p-4">
+        <div class="selected-head d-flex flex-row gap-2">
+          <div class="airplane-icon"></div>
+          <h4>{{ flight.FlightNumber }} ({{ flight.DepartureCityDetails.City }} to {{ flight.ArrivalCityDetails.City }})</h4>
         </div>
-        <div class="d-flex justify-content-center">
-          <button>Book Flight</button>
+        <div class=" selected-seats mt-4 mb-4 overflow-auto">
+          <ul class="list-group">
+              <li *ngFor="let seat of selectedSeats" class="list-group-item mb-2">
+              <div class="this-seat d-flex flex-column">
+                <h6>Selected Seat</h6>
+                <div class="d-flex flex-row justify-content-between ms-4">
+                  <h6>{{ seat.SeatNumber }} : {{ seat.Class }}</h6>
+                  <h6>{{ seat.Price | currency:'PHP':'symbol':'1.0-0' }}</h6>
+                  <!-- <h6>{{ seat.SeatNumber }} : {{ seat.Class }}</h6>
+                  <h6>{{ seat.Price | currency:'PHP':'symbol':'1.0-0' }}</h6> -->
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="selected-foot d-flex flex-column align-items-center gap-3">
+          <div class="selected-total d-flex flex-row justify-content-between w-100">
+            <h5>Total Price:</h5>
+            <h5>{{ getTotalPrice() | currency:'PHP':'symbol':'1.0-0' }}</h5>
+          </div>
+          <button class="btn btn-primary" (click)="bookSeats()" [disabled]="selectedSeats.length === 0">Book Selected Seats</button>
+        </div>
+    </div>
+    <div class="seat-layout d-flex flex-column ms-5 me-5 overflow-auto">
+      <div class="seat-form d-flex" *ngFor="let row of getRows(); let rowIndex = index">
+        <div class="seat" *ngFor="let column of columns; let colIndex = index" 
+             [ngClass]="getSeatClass(count + rowIndex * columns.length + colIndex)" 
+             (click)="selectSeat(count + rowIndex * columns.length + colIndex)">
+             {{ column }}{{ row }}
         </div>
       </div>
     </div>
-    <div class="seats d-flex justify-content-top me-5 ms-5">
-      <div *ngFor="let row of seats; let i = index" class="seat-row">
-        <div *ngFor="let seat of row; let j = index" class="seat" [ngClass]="{'booked': seat.booked}" (click)="bookSeat(seat)">
-          {{ seat.id }}
-        </div>
-      </div>
-      
-    </div>
+  </div>
 </div>

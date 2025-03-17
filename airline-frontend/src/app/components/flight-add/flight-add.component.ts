@@ -21,7 +21,7 @@ newFlight = {
   ArrivalCity: 0,
   DepartureDateTime: '',
   ArrivalDateTime: '',
-  Price: 0,
+  // Price: 0,
 }
 
 constructor(private flightService: FlightService, private router: Router){}
@@ -70,9 +70,9 @@ constructor(private flightService: FlightService, private router: Router){}
           ArrivalCity: 0,
           DepartureDateTime: '',
           ArrivalDateTime: '',
-          Price: 0,
+          // Price: 0,
       };
-      this.router.navigate(['/flight-list']);
+      this.router.navigate(['/flight-search']);
       },
       (error) => {
         console.error('Failed to add flight', error);

@@ -1,32 +1,70 @@
-<div class="container">
-    <div class="add">
-    <h2>Add Flight</h2>
-    <div class="d-flex justify-content-center pb-5">
-    <form (ngSubmit)="addFlight()" class="d-flex flex-column gap-1 float pt-4 pb-4 pe-5 ps-5">
-        <label>Flight Number:</label>
-        <input [(ngModel)]="newFlight.FlightNumber" name="flightNumber" required />
-        <label>Departure City:</label>
-        <select [(ngModel)]="newFlight.DepartureCity" name="dcity" required>
-            <option disabled>Choose City</option>
-            <option *ngFor="let city of cities" [ngValue]="city.CityID">{{city.City}} </option>
-        </select>        
-        <!-- <input [(ngModel)]="newFlight.DepartureCity.City" name="departureCity" required /> -->
-        <label>Destination City:</label>
-        <select [(ngModel)]="newFlight.ArrivalCity" name="acity" required>
-            <option disabled>Choose City</option>
-            <option *ngFor="let city of cities" [ngValue]="city.CityID">{{city.City}} </option>
-        </select>  
-        <!-- <input [(ngModel)]="newFlight.ArrivalCity" name="arrivalCity" required /> -->
-        <label>Departure Time:</label>
-        <input [(ngModel)]="newFlight.DepartureDateTime" name="departureTime" type="datetime-local" required />
-        <label>Arrival Time:</label>
-        <input [(ngModel)]="newFlight.ArrivalDateTime" name="arrivalTime" type="datetime-local" required />
-        <label>Price:</label>
-        <input [(ngModel)]="newFlight.Price" name="price" required />
-        <div class="d-flex mt-3 justify-content-center">
-        <button type="submit">Add Flight</button>
+<div class="container add d-flex flex-column">
+  <h2>Add Flight</h2>
+  <div class="add-body d-flex justify-content-center">
+    <div class="add-float d-flex flex-column p-4 ps-5 pe-5">
+      <form (ngSubmit)="addFlight()" class="d-flex flex-column  gap-1">
+        <div class="add-head">
+          <div>
+            <label>Flight Number:</label>
+          </div>
+          <input
+            [(ngModel)]="newFlight.FlightNumber"
+            name="flightNumber"
+            required
+          />
+        </div>
+        <div class="add-cities d-flex flex-row justify-content-between">
+          <div class="add-depart">
+            <div>
+              <label>Departure City:</label>
+            </div>
+            <select [(ngModel)]="newFlight.DepartureCity" name="dcity" required>
+              <option disabled>Choose City</option>
+              <option *ngFor="let city of cities" [ngValue]="city.CityID">
+                {{ city.City }}
+              </option>
+            </select>
+          </div>
+          <div class="add-arrive">
+            <div>
+              <label>Destination City:</label>
+            </div>
+            <select [(ngModel)]="newFlight.ArrivalCity" name="acity" required>
+              <option disabled>Choose City</option>
+              <option *ngFor="let city of cities" [ngValue]="city.CityID">
+                {{ city.City }}
+              </option>
+            </select>
+          </div>
+        </div>
+        <div class="add-date d-flex flex-row  justify-content-between">
+          <div class="add-depart">
+            <div>
+              <label>Departure Time:</label>
+            </div>
+            <input
+              [(ngModel)]="newFlight.DepartureDateTime"
+              name="departureTime"
+              type="datetime-local"
+              required
+            />
+          </div>
+          <div class="add-arrive">
+            <div>
+              <label>Arrival Time:</label>
+            </div>
+            <input
+              [(ngModel)]="newFlight.ArrivalDateTime"
+              name="arrivalTime"
+              type="datetime-local"
+              required
+            />
+          </div>
+        </div>
+        <div class="add-button d-flex justify-content-center">
+            <button type="submit">Add Flight</button>
+        </div>
+      </form>
     </div>
-    </form>
-</div>
-</div>
+  </div>
 </div>

@@ -32,47 +32,52 @@ class FlightSerializer(serializers.ModelSerializer):
         fields = [
             'FlightID', 'FlightNumber', 'DepartureCity', 'ArrivalCity',
             'DepartureCityDetails', 'ArrivalCityDetails',  # Include the read-only fields
-            'DepartureDateTime', 'ArrivalDateTime', 'AvailableSeats', 'Price'
+            'DepartureDateTime', 'ArrivalDateTime', 'AvailableSeats'
         ]
         extra_kwargs = {
             'AvailableSeats': {'read_only': True},
         }
 
-    def create(self, validated_data):
-        flight = Flight.objects.create(**validated_data)
-        self._generate_seats(flight)
-        return flight
+    # def create(self, validated_data):
+    #     flight = Flight.objects.create(**validated_data)
+    #     self._generate_seats(flight)
+    #     return flight
 
-    def _generate_seats(self, flight):
-        columns = ['A', 'B', 'C', 'D', 'E', 'F']
-        rows = range(1, 22)
+    # def _generate_seats(self, flight):
+    #     columns = ['A', 'B', 'C', 'D', 'E', 'F']
+    #     rows = range(1, 22)
 
-        for row in rows:
-            for column in columns:
-                seat_number = f"{column}{row}"
-                if row <= 7:
-                    seat_class = 'First Class'
-                elif row <= 14:
-                    seat_class = 'Business'
-                else:
-                    seat_class = 'Economy'
+    #     for row in rows:
+    #         for column in columns:
+    #             seat_number = f"{column}{row}"
+    #             if row <= 7:
+    #                 seat_class = 'First Class'
+    #                 seat_price = 80000
+    #             elif row <= 14:
+    #                 seat_class = 'Business'
+    #                 seat_price = 50000
+    #             else:
+    #                 seat_class = 'Economy'
+    #                 seat_price = 20000
 
-                Seat.objects.create(
-                    Flight=flight,
-                    SeatNumber=seat_number,
-                    Class=seat_class,
-                    User=None
-                )
+    #             Seat.objects.create(
+    #                 Flight=flight,
+    #                 SeatNumber=seat_number,
+    #                 Class=seat_class,
+    #                 User=None,
+    #                 Price=seat_price
+    #             )
 
 
 class SeatSerializer(serializers.ModelSerializer):
     class Meta:
         model = Seat
-        fields = ['SeatID', 'Flight', 'User', 'SeatNumber', 'Class']
+        fields = ['SeatID', 'Flight', 'User', 'SeatNumber', 'Class', 'Price']
         extra_kwargs = {
             'Flight':{'read_only': True},
             'SeatNumber':{'read_only': True},
             'Class':{'read_only': True},
+            'Price':{'read_only': True},
         }
 
 

@@ -24,7 +24,7 @@ export class LoginComponent {
         this.authService.getCurrentUser().subscribe(
           (user) => {
             localStorage.setItem('user', JSON.stringify(user));
-            this.router.navigate(['/flight-list']);
+            this.router.navigate(['/flight-search']);
           },
           (error) => {
             console.error('Failed to fetch user details:', error);

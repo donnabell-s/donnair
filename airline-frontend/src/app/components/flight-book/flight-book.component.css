@@ -1,0 +1,97 @@
+.seat-map {
+  margin-top: 20px;
+}
+
+.seat {
+  width: 40px;
+  height: 40px;
+  margin: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.seat:hover {
+  background-color: #ffd6de; /* Light gray on hover */
+}
+
+.selected {
+  border: 2px solid #CE4863; /* Blue border for selected seats */
+  background-color: #ffd6de; /* Light blue background for selected seats */
+}
+
+.booked {
+  background-color: #ff8b8b; /* Light red for booked seats */
+  border-color: #CE4863;
+  cursor: not-allowed; /* Change cursor for booked seats */
+}
+
+
+
+  /* ALL ME */
+
+
+  .selected-float{
+    background-color: #F3F2F0;
+    width: 560px;
+    height: 515px;
+    border-radius: 13px;
+  }
+
+  .this-seat{
+    background-color: white;
+  }
+
+  .selected-foot{
+    margin-top: auto; /* Push this div to the bottom */
+  }
+
+  button{
+    background-color: #B0C38B;
+    color: white;
+    border: none;
+    height: 50px;
+    width: 100%;
+    border-radius: 9px;
+    font-size: 17px;
+  }
+
+  .this-seat > h6{
+    font-size: 13px;
+    color: #626262;
+  }
+
+  .list-group-item{
+    border-radius: 9px;
+  }
+
+  .this-seat > div h6{
+    font-size: 18px;
+  }
+
+  .selected-seats{
+    /* overflow-y: auto;  */
+    scrollbar-width: none; 
+  }
+
+
+  .seat-form :nth-child(3){
+     margin-right: 45px;
+  }
+
+  .seat-layout:nth-child(7){
+    margin-bottom: 30px;
+  }
+
+  .seat-layout .seat-form:nth-child(7),  .seat-layout .seat-form:nth-child(14){
+    margin-bottom: 20px; /* or whatever margin you want */
+}
+
+.seat-layout{
+  height: 515px;
+  /* overflow-y: auto;  */
+  scrollbar-width: none; 
+}

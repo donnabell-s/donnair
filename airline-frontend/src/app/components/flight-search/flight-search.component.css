@@ -1,0 +1,115 @@
+.search input[type="date"]{
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+  }
+  
+  .search input{
+    width: 250px;
+    height: 40px;
+    border-width: 0;
+    background-color: transparent;
+    font-size: 18px;
+    color: #626262;
+  }
+  
+  .search .float{
+    border-radius: 14px;
+    background-color: #F3F2F0;
+    box-shadow: -2px 3px 8px #dedede;
+  }
+  
+  .search .city, .search .date{
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: -2px 3px 8px #dedede;
+  }
+  
+  .search input:focus {
+    outline: none;
+  }
+  
+  .search button{
+    background-color: #B0C38B;
+    border: none;
+    border-radius: 13px;
+    color: white;
+    height: 50px;
+    font-size: 20px;
+    font-weight: 500;
+  }
+  
+  .search label{
+    font-size: 13px;
+    margin: 10px 0 5px 0;
+    color: #626262;
+  }
+  
+  .search a{
+    font-size: 20px;
+    font-weight: 650;
+  }
+  
+  .first-col{
+    background-color: #CE4863;
+    width: 180px;
+    color: white;
+    padding: 25px;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+  }
+
+  .center-col{
+    width: 690px;
+  }
+
+  .list-row{
+    border-radius: 10px;
+    background-color: #F3F2F0;
+    padding: 0;
+  }
+
+  h6{
+    font-size: 14px;
+    margin-bottom: 0;
+  }
+
+  .first-col h4{
+    font-weight: 700;
+    font-size: 26px;
+    margin-bottom: 1px;
+  }
+
+  button.book, button.delete{
+    border: none;
+    border-radius: 8px;
+    height: 38px;
+    width: 140px;
+    color: white;
+    font-size: 15px;
+    font-weight: 600;
+  }
+
+  button.book{
+    background-color: #B0C38B;
+  }
+  
+  button.delete{
+    background-color: #bd4343;
+  }
+
+  .last-col{
+    gap: 3px;
+  }
+
+  .last-col h5{
+    font-weight: 700;
+  }
+
+  .datetime h4{
+    margin-bottom: 0;
+  }
+
+.datetime h6{
+    font-size: 13px;
+}

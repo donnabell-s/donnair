@@ -1,42 +1,124 @@
-import { Component } from '@angular/core';
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { CommonModule } from '@angular/common'; // Import CommonModule
+import { Component, OnInit } from '@angular/core';
+import { RouterModule, Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { SeatService } from '../../services/seat.service';
+import { FlightService } from '../../services/flight.service';
+import { AuthService } from '../../services/auth.service';
+import { Flight } from '../../model/flight';
 
 @Component({
   selector: 'app-flight-book',
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule, RouterModule],
   templateUrl: './flight-book.component.html',
-  styleUrl: './flight-book.component.css'
+  styleUrls: ['./flight-book.component.css']
 })
-export class FlightBookComponent {
-  rows: number = 21;
-  columns: number = 6;
-  seats: any[] = [];
-  colLabels: string[] = ['A', 'B', 'C', 'D', 'E', 'F'];
 
-  constructor() {
-    this.generateSeats();
+export class FlightBookComponent implements OnInit {
+  UserID!:number;
+  selectedFlightId!: number;
+  flight!: Flight;
+  seats: any[] = []; 
+  filteredSeats: any[] = [];
+  selectedSeats: any[] = []; 
+  columns: string[] = ['A', 'B', 'C', 'D', 'E', 'F']; 
+  rows: number[] = Array.from({ length: 21 }, (_, i) => i + 1); 
+  count!:number;
+
+  constructor(private seatService: SeatService, private router: Router, private authService: AuthService, private flightService: FlightService) {}
+  
+  ngOnInit(): void {
+    this.authService.getCurrentUser().subscribe(
+      (user)=>{
+        this.UserID = user.UserID;
+        console.log('Current User:', this.UserID);
+        const flightId = localStorage.getItem('selectedFlightId');
+        if (flightId){
+          this.selectedFlightId = parseInt(flightId, 10);
+          console.log('Selected Flight:', this.selectedFlightId);
+          this.flightService.getFlight(this.selectedFlightId).subscribe(
+            (data) => {
+              this.flight = data;
+              console.log('Flight Details:', this.flight);
+              this.seatService.getSeatsFlight(this.UserID, this.selectedFlightId).subscribe(
+                (seats) => {
+                  this.seats = seats;
+                  this.filteredSeats = this.seats.filter(seat => seat.Flight === this.selectedFlightId);
+                  console.log('Filtered Seats:', this.filteredSeats);
+                  this.count = this.filteredSeats.length > 0 ? this.filteredSeats[0].SeatID : null;
+                  console.log('Count:', this.count);
+                },
+                (error) => {
+                  console.error('Error fetching seats:', error);
+                }
+              );
+            },
+            (error) => {
+              console.error('Error fetching flights:', error);
+            }
+          );
+        }
+      },
+      (error)=>{
+        console.error('Error fetching current user:', error);
+      }
+    )
   }
 
-  generateSeats(): void {
-    for (let row = 1; row <= this.rows; row++) {
-      const rowSeats = [];
-      for (let col = 1; col <= this.columns; col++) {
-        const colLabel = this.colLabels[col - 1];
-        rowSeats.push({
-          id: `${colLabel}${row}`,
-          row: row,
-          column: colLabel,
-          booked: false
-        });
+
+  getRows(): number[] {
+    return this.rows;
+  }
+
+  getSeatClass(seatId: number): string {
+    if (this.isSeatSelected(seatId)) {
+      return 'seat selected';
+    }
+    return this.isSeatBooked(seatId) ? 'seat booked' : 'seat available';
+  }
+
+  isSeatBooked(seatId: number): boolean {
+    return this.filteredSeats.some(seat => seat.SeatID === seatId && seat.User !== null);
+  }
+
+  isSeatSelected(seatId: number): boolean {
+    return this.selectedSeats.some(seat => seat.SeatID === seatId);
+  }
+
+  selectSeat(seatId: number): void {
+    const seatDetails = this.filteredSeats.find(seat => seat.SeatID === seatId);
+    
+    if (seatDetails) {
+      if (!this.isSeatBooked(seatId)) {
+        const index = this.selectedSeats.indexOf(seatDetails);
+        if (index === -1) {
+          this.selectedSeats.push(seatDetails); 
+          console.log(`Seat selected: ${seatDetails.SeatNumber}`);
+        } else {
+          this.selectedSeats.splice(index, 1); 
+          console.log(`Seat deselected: ${seatDetails.SeatNumber}`);
+        }
+      } else {
+        console.log(`Seat ID: ${seatId} is booked and cannot be selected.`);
       }
-      this.seats.push(rowSeats);
+    } else {
+      console.error(`Seat details not found for Seat ID: ${seatId}`);
     }
   }
 
-  bookSeat(seat: any): void {
-    seat.booked = !seat.booked;
-    console.log('Seat Booked:', seat);
+  getTotalPrice(): number {
+    return this.selectedSeats.reduce((total, seat) => total + parseFloat(seat.Price), 0);
   }
+
+  bookSeats(): void {
+    this.selectedSeats.forEach(seat => {
+      this.seatService.bookSeat(seat.SeatID, this.UserID).subscribe(response => {
+        console.log('Seat booked successfully:', response);
+        this.router.navigate(['/flight-booked']);
+      }, error => {
+        console.error('Error booking seat:', error);
+      });
+    });
+  }
+
 }

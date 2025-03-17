@@ -75,25 +75,7 @@ html, body {
     margin: 0 50px 0 0;
   }
 
-button.book{
-  background-color: #B0C38B;
-  border: none;
-  border-radius: 8px;
-  height: 30px;
-  width: 110px;
-  color: white;
-  font-size: 15px;
-}
 
-button.delete{
-  background-color: #bd4343;
-  border: none;
-  border-radius: 8px;
-  height: 30px;
-  width: 110px;
-  color: white;
-  font-size: 14px;
-}
 
 .foot-link{
     margin: 50px 0 50px 0;
@@ -138,7 +120,7 @@ button.delete{
   color: #3A3A3A;
 }
 
-.home h2, .search h2, .add h2, .book h2{
+.home h2, .search h2, .add h2, .book h2, .booked h2{
   margin: 30px 0 25px 0;
 }
 
@@ -150,91 +132,15 @@ input[type="date"]::-moz-calendar-picker-indicator {
   display: none;
 }
 
-.search input[type="date"]{
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-}
-
-.search input{
-  width: 250px;
-  height: 40px;
-  border-width: 0;
-  background-color: transparent;
-  font-size: 18px;
-  color: #626262;
-}
-
-.search .float{
-  border-radius: 14px;
-  background-color: #F3F2F0;
-  box-shadow: -2px 3px 8px #dedede;
-}
-
-.search .city, .search .date{
-  background-color: white;
-  border-radius: 10px;
-  box-shadow: -2px 3px 8px #dedede;
-}
-
-.search input:focus {
-  outline: none;
-}
-
-.search button{
-  background-color: #B0C38B;
-  border: none;
-  border-radius: 13px;
-  color: white;
-  height: 50px;
-  font-size: 20px;
-  font-weight: 500;
-}
-
-.search label{
-  font-size: 13px;
-  margin: 10px 0 5px 0;
-  color: #626262;
-}
-
-.search a{
-  font-size: 20px;
-  font-weight: 650;
-}
 
 th{
   font-size: 19px;
   font-weight: 600;
 }
 
-.add .float{
-  background-color: #F3F2F0;
-  width: 350px;
-  border-radius: 15px;
-  box-shadow: -2px 3px 8px #dedede;
-}
 
-.add input{
-  border-radius: 4px;
-  border-style: none;
-  height: 33px;
-  padding: 5px 6px 5px 6px;
-  box-shadow: -1px 2px 6px #dedede;
-}
 
-.add label{
-  font-size: 13px;
-}
-
-.add button{
-  width: 130px;
-  height: 35px;
-  border: none;
-  background-color: #B0C38B;
-  border-radius: 8px;
-  color: white;
-  font-weight: 500;
-}
+  
 
 .book .float{
   border-radius: 14px;
@@ -325,4 +231,35 @@ th{
   font-size: 18px;
   font-weight: 600;
 }
+.line{
+  background-image: url('app/assets/dotline.svg');
+  height:30px;
+  width: 170px; 
+  background-size: contain;
+  background-repeat: no-repeat;
+  margin-right: 70px;
+}
 
+.plane-d{
+  background-image: url('app/assets/plane-d.svg');
+  height:21px;
+  width: 21px;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.plane-gap{
+  background-image: url('app/assets/plane-h.svg');
+  height:26px;
+  width: 26px;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.barcode{
+  background-image: url('app/assets/barcode.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 90%;
+  height:41px;
+}

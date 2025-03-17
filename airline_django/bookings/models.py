@@ -25,7 +25,7 @@ class Flight(models.Model):
     DepartureDateTime = models.DateTimeField()
     ArrivalDateTime = models.DateTimeField()
     AvailableSeats = models.IntegerField(default=126)
-    Price = models.DecimalField(max_digits=10, decimal_places=2)
+    # Price = models.DecimalField(max_digits=10, decimal_places=2)
 
     def __str__(self):
         return f"{self.FlightNumber} ({self.DepartureCity} to {self.ArrivalCity})"
@@ -46,16 +46,20 @@ class Flight(models.Model):
                 seat_number = f"{column}{row}"
                 if row <= 7:
                     seat_class = 'First Class'
+                    seat_price = 80000
                 elif row <= 14:
-                    seat_class = 'Business'
+                    seat_class = 'Business Class'
+                    seat_price = 50000
                 else:
-                    seat_class = 'Economy'
+                    seat_class = 'Economy Class'
+                    seat_price = 20000
 
                 Seat.objects.create(
                     Flight=self,
                     SeatNumber=seat_number,
                     Class=seat_class,
-                    User=None
+                    User=None,
+                    Price =seat_price
                 )
 
 class Seat(models.Model):
@@ -64,26 +68,22 @@ class Seat(models.Model):
     User = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     SeatNumber = models.CharField(max_length=10)
     Class = models.CharField(max_length=15, null=True)
+    Price = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
 
     def __str__(self):
         return f"Seat {self.SeatNumber} on Flight {self.Flight.FlightNumber}"
 
     def save(self, *args, **kwargs):
-        # Check if the seat is being created (is a new instance)
         is_new = self._state.adding
 
-        # Check if the seat is being booked (User  is being set)
         is_booking = self.User is not None
 
-        # If the seat is being booked and it's not a new instance, decrement the available seats
         if is_booking and not is_new:
             self.Flight.AvailableSeats -= 1
             self.Flight.save()
 
-        # Call the original save method
         super().save(*args, **kwargs)
 
-        # If the seat is being unbooked (User  is being set to None), increment the available seats
         if not is_booking and self.User is None and not is_new:
             self.Flight.AvailableSeats += 1
             self.Flight.save()

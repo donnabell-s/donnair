@@ -1,1 +1,123 @@
-<p>flight-booked works!</p>
+<!-- <div class="container">
+    <h2>Your Seats</h2>
+    
+    <div *ngIf="seats.length > 0; else noSeats">
+      <ul class="list-group">
+        <li class="list-group-item" *ngFor="let seat of seats">
+          <div>
+            <strong>Seat Number:</strong> {{ seat.SeatNumber }}<br>
+            <strong>Class:</strong> {{ seat.Class }}<br>
+            <strong>Flight ID:</strong> {{ seat.Flight }}<br>
+            <strong>User ID:</strong> {{ seat.User }}<br>
+            <strong>Flight Number:</strong> {{ flights[seat.Flight]?.FlightNumber }}<br>
+            <strong>Departure City:</strong> {{ flights[seat.Flight]?.DepartureCityDetails?.City }}<br>
+            <strong>Arrival City:</strong> {{ flights[seat.Flight]?.ArrivalCityDetails?.City }}<br>
+            <strong>Departure Time:</strong> {{ flights[seat.Flight]?.DepartureDateTime | date:'short' }}<br>
+            <strong>Arrival Time:</strong> {{ flights[seat.Flight]?.ArrivalDateTime | date:'short' }}<br>
+            <strong>Price:</strong> {{ flights[seat.Flight]?.Price | currency }}<br>
+          </div>
+        </li>
+      </ul>
+    </div>
+  
+    <ng-template #noSeats>
+      <p>No seats found for your account.</p>
+    </ng-template>
+</div> -->
+
+<div class="container booked">
+    <div>
+        <h2>Booked Flights</h2>
+    </div>
+    <div class="d-flex flex-row w-100 justify-content-center gap-5">
+        <div class="booked-float d-flex gap-2">
+            <div *ngIf="seats.length > 0; else noSeats" class="h-100">
+                <ul class="p-0 d-flex flex-column gap-3">
+                  <li class="list-group-item" *ngFor="let seat of seats">
+                    <div class="booked-seat">
+                        <div class="ticket-head d-flex flex-column p-3 ps-4">
+                          <h4>{{ flights[seat.Flight]?.DepartureCityDetails?.City }} to {{ flights[seat.Flight]?.ArrivalCityDetails?.City }}</h4>
+                          <h6>{{ flights[seat.Flight]?.DepartureDateTime | date: 'longDate' }}</h6>
+                        </div>
+                        <div class="ticket-body d-flex flex-row justify-content-between p-4">
+                            <div class="left-side">
+                                <div class="left-side-head d-flex flex-row mb-4 gap-2">
+                                  <div class="d-flex align-items-center justify-content-center">
+                                    <div class="plane-d"></div>
+                                  </div>
+                                  <h6>{{ flights[seat.Flight]?.FlightNumber }} DonnAir</h6>
+                                  <h6 class="ms-4">{{ seat.Class }}</h6>
+                                </div>
+                                <div class="left-side-body d-flex flex-row justify-content-between">
+                                    <div class="side d-flex flex-column gap-3">
+                                        <div class="top">
+                                            <h3>{{ flights[seat.Flight]?.DepartureCityDetails?.City }}</h3>
+                                            <h6>{{ flights[seat.Flight]?.DepartureCityDetails?.Country }}</h6>
+                                        </div>
+                                        <div class="bottom">
+                                            <h6>Depart</h6>
+                                            <h6>{{ flights[seat.Flight]?.DepartureDateTime | date:'short' }}</h6>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex align-items-center justify-content-center">
+                                      <div class="plane-gap"></div>
+                                    </div>
+                                    <div class="side d-flex flex-column gap-3 ms-3">
+                                        <div class="top">
+                                            <h3>{{ flights[seat.Flight]?.ArrivalCityDetails?.City }}</h3>
+                                            <h6>{{ flights[seat.Flight]?.ArrivalCityDetails?.Country }}</h6>
+                                        </div>
+                                        <div class="bottom">
+                                            <h6>Arrival</h6>
+                                            <h6>{{ flights[seat.Flight]?.ArrivalDateTime | date:'short' }}</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="right-side d-flex flex-column justify-content-end">
+                              <h3>{{ seat.Price | currency:'PHP':'symbol':'1.0-0' }}</h3>
+                              <div class="d-flex flex-column">
+                                <div class="d-flex flex-row gap-1 info "><h6>Baggage:</h6><h6>up to 10kg</h6></div>
+                                <div class="d-flex flex-row gap-1 info "><h6>Seat no:</h6><h6>{{ seat.SeatNumber }}</h6></div>
+                              </div>
+                              <div class="d-flex justify-content-start align-items-center mt-3">
+                                <div class="barcode"></div>
+                              </div>
+                          </div>
+                        </div>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+              <ng-template #noSeats>
+                <p>No seats found for your account.</p>
+              </ng-template>
+        </div>
+        <div class="filter d-flex flex-column p-4 pt-5 pb-5 gap-2">
+          <div class="filter-head">
+            <h3>Sort and Filter</h3>
+          </div>
+          <div class="filter-date">
+            <div class="d-flex gap-2">
+              <input type="radio" id="nearest-date" name="date" value="nearest" />
+              <label for="nearest-date">Nearest Date</label>
+            </div>
+            <div class="d-flex gap-2">
+              <input type="radio" id="farthest-date" name="date" value="farthest" />
+              <label for="farthest-date">Farthest Date</label>
+            </div>
+          </div>
+          <div class="filter-line"></div>
+          <div class="filter-price">
+            <div class="d-flex gap-2">
+              <input type="radio" id="price-high" name="price" value="high" />
+              <label for="price-high">Price High</label>
+            </div>
+            <div class="d-flex gap-2">
+              <input type="radio" id="price-low" name="price" value="low" />
+              <label for="price-low">Price Low</label>
+            </div>
+          </div>
+        </div>
+    </div>
+</div>

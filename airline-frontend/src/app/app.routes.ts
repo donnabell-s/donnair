@@ -13,7 +13,7 @@ import { FlightBookedComponent } from './components/flight-booked/flight-booked.
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'flight-list', component: FlightListComponent, canActivate: [authGuard] },
+  // { path: 'flight-list', component: FlightListComponent, canActivate: [authGuard] },
   { path: 'flight-search', component: FlightSearchComponent, canActivate: [authGuard] },
   { path: 'flight-add', component: FlightAddComponent, canActivate: [authGuard], data: { role: 'admin' } },
   { path: 'flight-book', component: FlightBookComponent, canActivate: [authGuard], data: { role: 'customer' } },

@@ -12,5 +12,4 @@ export interface Flight{
     DepartureDateTime: Date;
     ArrivalDateTime: Date;
     AvailableSeats: number;
-    Price: number;
 }

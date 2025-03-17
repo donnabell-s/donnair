@@ -1,0 +1,89 @@
+.booked-seat, .filter{
+  background-color: #F3F2F0;
+}
+
+.ticket-head{
+  background-color: #CE4863;
+  color: white;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.booked-float, .booked-seat, .filter{
+  width: 740px;
+  border-radius: 10px;
+}
+
+.filter{
+  height: 310px;
+  width: 290px;
+}
+
+.left-side{
+  width: 350px;
+}
+
+h6, .side h3{
+  margin: 0;
+  padding: 0;
+}
+
+.side h3, .right-side h3{
+  font-weight: 700;
+}
+
+.bottom h6{
+  font-size: 13px;
+  color: #626262;
+}
+
+.bottom h6:first-child{
+  font-size: 15px;
+  color: #3A3A3A;
+}
+
+.info h6,.top h6{
+  font-size: 14px;
+  color: #626262;
+}
+.info h6{
+  font-size: 13px;
+}
+
+.info h6:last-child{
+  color: #3A3A3A;
+}
+
+.ticket-head h4{
+  margin-bottom: 1px;
+}
+
+.ticket-head h6{
+  font-size: 15px;
+}
+
+.right-side{
+  width: 180px;
+}
+
+.filter-line {
+  width: 100%; /* Set the width of the line */
+  height: 2px; /* Set the height of the line */
+  background-color: #CDCDCD; /* Color of the line */
+  margin: 10px auto; /* Center the line horizontally with margin */
+}
+
+.filter-date > div, .filter-price > div{
+  align-items: center;
+  height: 28px;
+}
+
+input[type="radio"],
+input[type="checkbox"] {
+    width: 16px; /* Set the width of the radio/checkbox */
+    height: 16px; /* Set the height of the radio/checkbox */
+}
+
+.filter h3{
+  font-weight: 650;
+}
