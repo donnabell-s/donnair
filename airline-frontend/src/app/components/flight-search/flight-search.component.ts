@@ -1,4 +1,3 @@
-
 import { Component, OnInit } from '@angular/core';
 import { FlightService } from '../../services/flight.service';
 import { Flight } from '../../model/flight';
@@ -11,7 +10,7 @@ import { FormsModule } from '@angular/forms';
   standalone: true,
   imports: [CommonModule, FormsModule, RouterModule],
   templateUrl: './flight-search.component.html',
-  styleUrls: ['./flight-search.component.css'], // Fixed typo from styleUrl to styleUrls
+  styleUrls: ['./flight-search.component.css'],
   providers: [FlightService]
 })
 export class FlightSearchComponent implements OnInit {
@@ -32,7 +31,7 @@ export class FlightSearchComponent implements OnInit {
     this.flightService.getFlights().subscribe(
       (data) => {
         this.flights = data;
-        this.filteredFlights = data; // Set filteredFlights to all flights initially
+        this.filteredFlights = data;
       },
       (error) => {
         console.error('Error fetching flights:', error);
@@ -47,10 +46,17 @@ export class FlightSearchComponent implements OnInit {
         flight.DepartureCityDetails.City.toLowerCase().includes(this.searchCriteria.DepartureCityDetails.toLowerCase());
       const matchesDestination = !this.searchCriteria.ArrivalCityDetails || 
         flight.ArrivalCityDetails.City.toLowerCase().includes(this.searchCriteria.ArrivalCityDetails.toLowerCase());
+
+      const flightDepartureDate = new Date(flight.DepartureDateTime);
+      const searchDepartureDate = new Date(this.searchCriteria.DepartureDateTime);
       const matchesDepartureDT = !this.searchCriteria.DepartureDateTime || 
-        new Date(flight.DepartureDateTime).toDateString() === new Date(this.searchCriteria.DepartureDateTime).toDateString();
+        flightDepartureDate.toDateString() === searchDepartureDate.toDateString();
+
+      const flightArrivalDate = new Date(flight.ArrivalDateTime);
+      const searchArrivalDate = new Date(this.searchCriteria.ArrivalDateTime);
       const matchesArrivalDT = !this.searchCriteria.ArrivalDateTime || 
-        new Date(flight.ArrivalDateTime).toDateString() === new Date(this.searchCriteria.ArrivalDateTime).toDateString();
+        flightArrivalDate.toDateString() === searchArrivalDate.toDateString();
+
       return matchesDeparture && matchesDestination && matchesDepartureDT && matchesArrivalDT;
     });
   }
@@ -74,11 +80,8 @@ export class FlightSearchComponent implements OnInit {
   }
 
   bookFlight(flightId: number): void {
-    // Save the FlightID to local storage
     localStorage.setItem('selectedFlightId', flightId.toString());
 
-    // Navigate to the flight booking page
     this.router.navigate(['/flight-book']);
   }
-  
 }
