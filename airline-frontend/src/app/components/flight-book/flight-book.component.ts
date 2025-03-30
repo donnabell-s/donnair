@@ -6,6 +6,7 @@ import { SeatService } from '../../services/seat.service';
 import { FlightService } from '../../services/flight.service';
 import { AuthService } from '../../services/auth.service';
 import { Flight } from '../../model/flight';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-flight-book',
@@ -111,14 +112,20 @@ export class FlightBookComponent implements OnInit {
   }
 
   bookSeats(): void {
-    this.selectedSeats.forEach(seat => {
-      this.seatService.bookSeat(seat.SeatID, this.UserID).subscribe(response => {
-        console.log('Seat booked successfully:', response);
-        this.router.navigate(['/flight-booked']);
-      }, error => {
-        console.error('Error booking seat:', error);
-      });
+    const bookingRequests = this.selectedSeats.map(seat => {
+      return this.seatService.bookSeat(seat.SeatID, this.UserID);
     });
+  
+    // Use forkJoin to wait for all booking requests to complete
+    forkJoin(bookingRequests).subscribe(
+      responses => {
+        console.log('All seats booked successfully:', responses);
+        this.router.navigate(['/flight-booked']);
+      },
+      error => {
+        console.error('Error booking seats:', error);
+      }
+    );
   }
 
 }

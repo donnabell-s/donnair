@@ -28,14 +28,17 @@
           <button class="btn btn-primary" (click)="bookSeats()" [disabled]="selectedSeats.length === 0">Book Selected Seats</button>
         </div>
     </div>
-    <div class="seat-layout d-flex flex-column ms-5 me-5 overflow-auto">
-      <div class="seat-form d-flex" *ngFor="let row of getRows(); let rowIndex = index">
-        <div class="seat" *ngFor="let column of columns; let colIndex = index" 
+    <div class="plane-layout-right d-flex flex-column  align-items-center">
+      <div class="airplane-head"></div>
+      <div class="seat-layout d-flex flex-column ms-5 me-5 align-items-center">
+        <div class="seat-form d-flex" *ngFor="let row of getRows(); let rowIndex = index">
+          <div class="seat" *ngFor="let column of columns; let colIndex = index" 
              [ngClass]="getSeatClass(count + rowIndex * columns.length + colIndex)" 
              (click)="selectSeat(count + rowIndex * columns.length + colIndex)">
              {{ column }}{{ row }}
+          </div>
         </div>
       </div>
-    </div>
+  </div>
   </div>
 </div>

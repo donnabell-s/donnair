@@ -6,17 +6,53 @@ html, body {
   scrollbar-width: none
 }
 
-.vignette {
+/* .container{
+  height: 100vh;
+  width: 100vw;
+  margin: 0;
+  padding: 0;
+} */
+
+.start-left, .start-right {
+  flex: 0 0 auto;
+  width: 50%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+}
+
+.start-left {
+  background-image: url('app/assets/start-left.svg'); /* Replace with your image path */
+}
+
+.start-right {
+  background-image: url('app/assets/start-right.svg'); /* Replace with your image path */
+}
+
+
+.start-left {
+  overflow-y: auto; /* Allow vertical scrolling if content exceeds height */
+  scrollbar-width: none;
+}
+
+/* .start-float{
+  width: 0%;
+} */
+
+
+
+
+/* .vignette {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   box-shadow: 0 0 180px rgba(54, 32, 16, 0.5) inset;
-}
+} */
 
-.bg-start {
-  background-image: url("app/assets/island-bg.jpg");
+/* .bg-start {
+  background-image: url("app/assets/start-page.svg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -24,30 +60,39 @@ html, body {
   height: 100dvh;
   width: 100dvw;
   z-index: -1;
-}
+} */
 
-.start label{
+.start label, .start span{
   font-weight: 500;
-  color: #626262;
+  color: white;
 }
 
 .start a{
-  color: #8AA6E6;
+  color: #B1C8FF;
+  text-decoration: none;
 }
 
-.start .float {
+/* .start .float {
   background-color: white;
   width: 450px;
-}
+} */
+
+/* .start-left{
+  padding: 80px;
+} */
 
 .start-logo {
-    background-image: url('app/assets/donnair-logo.svg');
-    height:58px;
-    width: 300px; 
+    background-image: url('app/assets/start-white.svg');
+    height: 90px;
+    width: auto;
+    /* max-width: 425px;*/
+    max-height: 90px; 
     background-size: contain;
     background-repeat: no-repeat;
-    margin: 50px 0 5px 0;
+    margin: 0 0 -5px -17px;
   }
+
+
 
   .airplane-icon {
     background-image: url('app/assets/plane-icon.svg');
@@ -88,13 +133,15 @@ html, body {
 
 .start input, .start button{
     height: 47px;
-    border-radius: 7px;
+    border-radius: 13px;
+    width: 90%;
+    max-width: 500px;
 }
 
 .start input{
-    border-color:  #828282;
+    /* border-color:  #d38f8f; */
     padding: 3px 12px 3px 12px;
-    border-style: solid;
+    border-style: none;
 }
 
 .start button{
@@ -105,7 +152,7 @@ html, body {
 }
 
 .start h5{
-    color: #626262;
+    color: #ffffff;
 }
 
 .navbar{
@@ -263,3 +310,15 @@ th{
   width: 90%;
   height:41px;
 }
+
+
+.airplane-head{
+  background-image: url('app/assets/airplane-head.svg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 436px;
+  height:378px;
+
+}
+
+

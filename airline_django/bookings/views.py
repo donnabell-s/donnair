@@ -41,7 +41,6 @@ class SeatViewSet(viewsets.ModelViewSet):
     permission_classes = [AllowAny]
     queryset = Seat.objects.all()
     serializer_class = SeatSerializer
-
     
 
 # class UserTicketViewSet(viewsets.ModelViewSet):

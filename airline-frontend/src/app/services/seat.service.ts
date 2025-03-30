@@ -33,19 +33,18 @@ export class SeatService {
   constructor(private http: HttpClient) { }
 
   getSeats(userId: number): Observable<any[]> {
-    return this.http.get<any[]>(`${this.seatUrl}?userId=${userId}`); // Assuming your API supports filtering by userId
+    return this.http.get<any[]>(`${this.seatUrl}?userId=${userId}`); 
   }
 
-  // New method to book a specific seat
   bookSeat(seatId: number, User: number): Observable<any> {
     const bookingData = {
       User: User
     };
-    return this.http.patch(`${this.seatUrl}${seatId}/`, bookingData); // URL includes the seat ID
+    return this.http.patch(`${this.seatUrl}${seatId}/`, bookingData); 
   }
 
   getSeatsFlight(userId: number, flightId: number): Observable<any[]> {
-    return this.http.get<any[]>(`${this.seatUrl}?userId=${userId}&flightId=${flightId}`); // Assuming your API supports filtering by userId and flightId
+    return this.http.get<any[]>(`${this.seatUrl}?userId=${userId}&flightId=${flightId}`); 
   }
 
 }

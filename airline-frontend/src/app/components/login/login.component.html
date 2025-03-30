@@ -1,4 +1,4 @@
-<div class="container-mg h-100 w-100 d-flex justify-content-center flex-wrap start">
+<!-- <div class="container-mg h-100 w-100 d-flex justify-content-start flex-wrap start">
     <div
       class="d-flex justify-content-between align-items-center flex-column float"
     >
@@ -37,4 +37,31 @@
     </div>
   </div>
   <div class="vignette bg-start"></div>
-  
+   -->
+
+
+<div class="h-100 w-100 d-flex start">
+  <div class="start-left d-flex flex-column p-1 p-xl-4 p-xxl-5">
+    <form (ngSubmit)="onSubmit()" class="start-float d-flex flex-column justify-content-start gap-1 gap-md-3 gap-xl-5  p-1 ps-xl-5 pe-xl-5 p-xxl-5 h-100">
+      <div class="start-top">
+        <div class="start-logo"></div>
+        <h5>Book Smarter, Fly Better.</h5>
+      </div>
+        <div class="start-mid d-flex flex-column gap-2 ">
+            <div class="d-flex flex-column input-container gap-1">
+              <label>Username:</label>
+              <input [(ngModel)]="credentials.username" name="email" required />
+            </div>
+            <div class="d-flex flex-column input-container gap-1">
+              <label>Password:</label>
+              <input [(ngModel)]="credentials.password" type="password" name="password" required />
+            </div>
+        </div>
+        <div class="start-foot d-flex flex-column gap-2">
+          <button class="btn btn-success" type="submit">Login</button>
+          <span>Don't have an account? <a routerLink="/register">Sign Up</a></span>
+        </div>
+    </form>
+  </div>
+  <div class="start-right"></div>
+</div>

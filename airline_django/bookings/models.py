@@ -1,6 +1,8 @@
 from django.db import models
 from django.conf import settings
 from django.contrib.auth.models import AbstractUser
+from django.db import transaction
+from django.db.models import F
 
 class User(AbstractUser):
     UserID = models.AutoField(primary_key=True)
@@ -75,16 +77,41 @@ class Seat(models.Model):
 
     def save(self, *args, **kwargs):
         is_new = self._state.adding
-
         is_booking = self.User is not None
 
         if is_booking and not is_new:
-            self.Flight.AvailableSeats -= 1
-            self.Flight.save()
+            with transaction.atomic():
+                flight = Flight.objects.select_for_update().get(pk=self.Flight_id)
+                print(f"Current AvailableSeats: {flight.AvailableSeats}")
+                flight.AvailableSeats -= 1
+                print(f"New AvailableSeats: {flight.AvailableSeats}")
+                flight.save()
 
         super().save(*args, **kwargs)
 
         if not is_booking and self.User is None and not is_new:
-            self.Flight.AvailableSeats += 1
-            self.Flight.save()
+            with transaction.atomic():
+                flight = Flight.objects.select_for_update().get(pk=self.Flight_id)
+                flight.AvailableSeats += 1
+                print(f"Seat unbooked: {self.SeatID}, New AvailableSeats: {flight.AvailableSeats}")
+                flight.save()
+
+
+
+    # def save(self, *args, **kwargs):
+    #     is_new = self._state.adding
+    #     is_booking = self.User is not None
+
+
+    #     if is_booking and not is_new:
+    #         print(f"Current AvailableSeats: {self.Flight.AvailableSeats}")
+    #         self.Flight.AvailableSeats -= 1
+    #         print(f"New AvailableSeats: {self.Flight.AvailableSeats}")
+    #         self.Flight.save()
+
+    #     super().save(*args, **kwargs)
+
+    #     if not is_booking and self.User is None and not is_new:
+    #         self.Flight.AvailableSeats += 1
+    #         self.Flight.save()
 

@@ -91,7 +91,16 @@
 }
 
 .seat-layout{
-  height: 515px;
-  /* overflow-y: auto;  */
-  scrollbar-width: none; 
+  height: 1200px;
+  width: 100%;
+  /* overflow-y: auto; 
+  scrollbar-width: none;  */
+  background-color: #F3F2F0;
+  padding-top: 7px;
+  border-bottom-left-radius: 130px;
+  border-bottom-right-radius: 130px;
+  margin-bottom: 45px;
 }
+
+
+
